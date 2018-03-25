@@ -1,0 +1,32 @@
+from xml.etree import ElementTree as ET
+import json
+
+tree = ET.parse('data.xml')
+key = []
+value = []
+list = []
+string = ""
+root = tree.getroot()
+for elem in root:
+   data = elem.text
+   key.append(data.partition(':')[0])
+   value.append(data.partition(':')[2])
+
+
+
+toJson = ""
+for x in range(0,len(key)):
+    string ='"' + key[x] + '"' + ':' + '"' + value[x] + '"' + ','
+
+    toJson = toJson + string
+
+print toJson.__len__()
+toJson = toJson[0:toJson.__len__()-1]
+toJson = "{" + toJson + "}"
+
+
+data = json.loads(toJson)
+
+print data["Above board"]
+
+print data["Zig-Zag"]
